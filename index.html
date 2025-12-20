@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevUtil: Ferramentas Online Gratuitas para Desenvolvedores</title>
+    <meta name="description" content="Converta JSON, conte caracteres, gere senhas fortes e formate código de forma rápida e segura. As melhores ferramentas para programadores.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para anúncios: invisível se vazio, mas reserva espaço para evitar saltos (CLS) */
+        .ad-slot {
+            margin: 20px auto;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0,0,0,0.02);
+            border-radius: 8px;
+        }
+        .tool-card { @apply bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow; }
+        code { @apply bg-gray-100 px-1 rounded text-red-500; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <span class="text-2xl font-black text-blue-600 tracking-tighter">DEV<span class="text-slate-400">UTIL</span></span>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="#text-tools" class="hover:text-blue-600">Texto</a>
+                <a href="#dev-tools" class="hover:text-blue-600">Desenvolvimento</a>
+                <a href="#security-tools" class="hover:text-blue-600">Segurança</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white py-12 border-b border-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">Ferramentas de Utilidade para o Dia a Dia</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                Processamos seus dados localmente no navegador. Mais velocidade e **100% de privacidade** para você.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        
+        <div class="ad-slot" id="top-ad">
+            <span class="text-xs text-gray-300 uppercase tracking-widest">Publicidade</span>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 space-y-10">
+                
+                <section id="text-tools">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">📝 Manipulação de Texto</h2>
+                    <div class="tool-card">
+                        <label class="block text-sm font-bold mb-2">Contador e Formatador</label>
+                        <textarea id="mainText" class="w-full h-40 p-4 border rounded-xl focus:ring-4 focus:ring-blue-100 outline-none transition-all" placeholder="Cole seu texto ou artigo aqui..."></textarea>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                            <div class="bg-blue-50 p-3 rounded-lg text-center">
+                                <span class="block text-xs uppercase text-blue-400 font-bold">Caracteres</span>
+                                <span id="chars" class="text-xl font-bold text-blue-700">0</span>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg text-center">
+                                <span class="block text-xs uppercase text-green-400 font-bold">Palavras</span>
+                                <span id="words" class="text-xl font-bold text-green-700">0</span>
+                            </div>
+                            <button onclick="transformText('up')" class="bg-white border border-gray-200 hover:bg-gray-50 rounded-lg text-xs font-bold uppercase">TUDO MAIÚSCULO</button>
+                            <button onclick="transformText('low')" class="bg-white border border-gray-200 hover:bg-gray-50 rounded-lg text-xs font-bold uppercase">tudo minúsculo</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="dev-tools">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">💻 Desenvolvimento</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="tool-card">
+                            <h3 class="font-bold mb-2">Formatador JSON</h3>
+                            <p class="text-xs text-slate-500 mb-4">Torne seu JSON legível instantaneamente.</p>
+                            <button onclick="formatJSON()" class="w-full bg-slate-800 text-white py-2 rounded-lg hover:bg-black transition">Formatar JSON</button>
+                        </div>
+                        <div class="tool-card">
+                            <h3 class="font-bold mb-2">Gerador de Lorem Ipsum</h3>
+                            <p class="text-xs text-slate-500 mb-4">Gere 3 parágrafos de texto para teste.</p>
+                            <button onclick="generateLorem()" class="w-full bg-slate-800 text-white py-2 rounded-lg hover:bg-black transition">Gerar Texto</button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="ad-slot">
+                    <span class="text-xs text-gray-300 uppercase tracking-widest">Publicidade</span>
+                </div>
+
+                <section id="security-tools">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">🛡️ Segurança</h2>
+                    <div class="tool-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h3 class="font-bold">Gerador de Senha Forte</h3>
+                                <p id="passPreview" class="font-mono text-blue-600 text-lg mt-2">********</p>
+                            </div>
+                            <button onclick="genPass()" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700">Gerar</button>
+                        </div>
+                    </div>
+                </section>
+
+                <article class="prose lg:prose-xl text-slate-600 bg-white p-8 rounded-2xl border border-gray-100">
+                    <h2 class="text-slate-900 font-bold text-xl">Por que usar o DevUtil?</h2>
+                    <p>Muitas vezes, como programadores ou redatores, precisamos de ferramentas rápidas como um <strong>contador de palavras</strong> ou um <strong>formatador de JSON</strong>. O DevUtil foi criado para ser leve, rápido e não enviar seus dados para nenhum servidor.</p>
+                    <p>Diferente de outros sites, não usamos bancos de dados para armazenar suas informações sensíveis, como senhas geradas. Tudo acontece via <code>JavaScript</code> direto no seu dispositivo.</p>
+                </article>
+            </div>
+
+            <aside class="space-y-6">
+                <div class="bg-blue-600 p-6 rounded-2xl text-white">
+                    <h3 class="font-bold text-lg mb-2">Dica Pro</h3>
+                    <p class="text-sm opacity-90">Salve este site nos seus favoritos (CTRL+D) para acessar as ferramentas sempre que precisar de produtividade.</p>
+                </div>
+                
+                <div class="ad-slot h-[600px] flex flex-col bg-gray-100 border-dashed border-2 border-gray-200">
+                    <span class="text-xs text-gray-400 uppercase font-bold">Espaço Anúncio Skyscraper</span>
+                    <p class="text-[10px] text-gray-400 px-4 text-center mt-2">Este formato de anúncio lateral costuma render mais dinheiro.</p>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">© 2025 DevUtil - Ferramentas de Código Aberto.</p>
+            <div class="flex justify-center gap-6 text-sm">
+                <a href="#" class="hover:text-white">Privacidade</a>
+                <a href="#" class="hover:text-white">Termos de Uso</a>
+                <a href="#" class="hover:text-white">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // LÓGICA DE TEXTO
+        const mainText = document.getElementById('mainText');
+        mainText.addEventListener('input', () => {
+            const val = mainText.value;
+            document.getElementById('chars').innerText = val.length;
+            document.getElementById('words').innerText = val.trim() === "" ? 0 : val.trim().split(/\s+/).length;
+        });
+
+        function transformText(type) {
+            mainText.value = type === 'up' ? mainText.value.toUpperCase() : mainText.value.toLowerCase();
+        }
+
+        // LÓGICA JSON
+        function formatJSON() {
+            try {
+                const obj = JSON.parse(mainText.value);
+                mainText.value = JSON.stringify(obj, null, 4);
+            } catch(e) { alert("JSON Inválido para formatar!"); }
+        }
+
+        // LÓGICA SENHA
+        function genPass() {
+            const pass = Math.random().toString(36).slice(-10) + Math.random().toString(36).toUpperCase().slice(-4) + "!@#";
+            document.getElementById('passPreview').innerText = pass;
+        }
+
+        // LÓGICA LOREM
+        function generateLorem() {
+            mainText.value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            // Disparar o evento de contagem manualmente
+            mainText.dispatchEvent(new Event('input'));
+        }
+    </script>
+</body>
+</html>
