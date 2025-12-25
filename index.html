@@ -6,23 +6,17 @@
     <title>DevUtil: Ferramentas Online Gratuitas para Desenvolvedores</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
     <meta name="description" content="Converta JSON, conte caracteres, gere senhas fortes e formate código de forma rápida e segura. As melhores ferramentas para programadores.">
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5169492632479468"
      crossorigin="anonymous"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilo para anúncios: invisível se vazio, mas reserva espaço para evitar saltos (CLS) */
-        .ad-slot {
-            margin: 20px auto;
-            text-align: center;
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0,0,0,0.02);
-            border-radius: 8px;
-        }
         .tool-card { @apply bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow; }
         code { @apply bg-gray-100 px-1 rounded text-red-500; }
+        
+        /* Classe para esconder a barra de rolagem se o anúncio for largo demais */
+        .ad-container { min-height: 280px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -49,10 +43,6 @@
 
     <main class="container mx-auto px-4 py-8">
         
-        <div class="ad-slot" id="top-ad">
-            <span class="text-xs text-gray-300 uppercase tracking-widest">Publicidade</span>
-        </div>
-
         <div class="grid lg:grid-cols-3 gap-8">
             
             <div class="lg:col-span-2 space-y-10">
@@ -107,18 +97,27 @@
                                 <h3 class="text-xl font-semibold text-gray-800 mb-2">Gerador de Lorem Ipsum (Texto Simulado)</h3>
                                 <p class="text-gray-600 text-sm leading-relaxed">
                                     Gere textos de preenchimento (dummy text) instantaneamente para seus projetos de design gráfico, web design e prototipagem. 
-                                    O Lorem Ipsum é o padrão da indústria para simular a aparência final de layouts e impressos, evitando que o leitor se distraia com o conteúdo legível durante a fase de aprovação visual. 
-                                    Nossa ferramenta cria parágrafos neutros em latim, ideais para preencher mockups e testar a diagramação de sites e aplicativos.
+                                    O Lorem Ipsum é o padrão da indústria para simular a aparência final de layouts e impressos.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <div class="ad-slot">
-                    <span class="text-xs text-gray-300 uppercase tracking-widest">Publicidade</span>
+                <div class="w-full my-8 flex flex-col items-center justify-center overflow-hidden bg-gray-50 rounded-lg border border-gray-100 p-4 ad-container">
+                    <span class="text-[10px] text-gray-400 block w-full text-center mb-2 uppercase tracking-widest">Publicidade</span>
+                    
+                    <ins class="adsbygoogle"
+                         style="display:block; min-width: 300px; width: 100%;"
+                         data-ad-client="ca-pub-5169492632479468"
+                         data-ad-slot="4947039416"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    
                 </div>
-
                 <section id="security-tools">
                     <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">🛡️ Segurança</h2>
                     <div class="tool-card">
@@ -152,9 +151,8 @@
                     <p class="text-sm opacity-90">Salve este site nos seus favoritos (CTRL+D) para acessar as ferramentas sempre que precisar de produtividade.</p>
                 </div>
                 
-                <div class="ad-slot h-[600px] flex flex-col bg-gray-100 border-dashed border-2 border-gray-200">
-                    <span class="text-xs text-gray-400 uppercase font-bold">Espaço Anúncio Skyscraper</span>
-                    <p class="text-[10px] text-gray-400 px-4 text-center mt-2">Espaço Anúncio.</p>
+                <div class="hidden lg:flex h-[600px] flex-col bg-gray-100 border-dashed border-2 border-gray-200 justify-center items-center rounded-2xl">
+                    <span class="text-xs text-gray-400 uppercase font-bold">Espaço Anúncio</span>
                 </div>
             </aside>
 
@@ -201,7 +199,6 @@
         // LÓGICA LOREM
         function generateLorem() {
             mainText.value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            // Disparar o evento de contagem manualmente
             mainText.dispatchEvent(new Event('input'));
         }
     </script>
