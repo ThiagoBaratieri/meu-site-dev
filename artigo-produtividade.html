@@ -14,10 +14,28 @@
 
     <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="index.html" class="text-2xl font-black text-blue-600 tracking-tighter">DEV<span class="text-slate-400">UTIL</span></a>
+            <span class="text-2xl font-black text-blue-600 tracking-tighter">DEV<span class="text-slate-400">UTIL</span></span>
+            
             <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
-                <a href="index.html" class="hover:text-blue-600">Ferramentas</a>
-                <a href="blog.html" class="font-bold text-blue-600">Voltar ao Blog</a>
+                <a href="#text-tools" class="hover:text-blue-600">Texto</a>
+                <a href="#dev-tools" class="hover:text-blue-600">Desenvolvimento</a>
+                <a href="#security-tools" class="hover:text-blue-600">Segurança</a>
+                <a href="blog.html" class="text-blue-600 font-bold px-3 py-1 bg-blue-50 rounded-full hover:bg-blue-100 transition">Blog / Dicas</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-blue-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="flex flex-col p-4 space-y-4 font-medium text-slate-600">
+                <a href="#text-tools" class="hover:text-blue-600" onclick="toggleMenu()">Texto</a>
+                <a href="#dev-tools" class="hover:text-blue-600" onclick="toggleMenu()">Desenvolvimento</a>
+                <a href="#security-tools" class="hover:text-blue-600" onclick="toggleMenu()">Segurança</a>
+                <a href="blog.html" class="text-blue-600 font-bold bg-blue-50 p-3 rounded-lg text-center" onclick="toggleMenu()">Ler Blog & Dicas</a>
             </div>
         </div>
     </nav>
@@ -96,5 +114,18 @@
             banner.classList.add('translate-y-full');
         }
     </script>
+
+    <script>
+        // Lógica do Menu Mobile
+        const btnMobile = document.getElementById('mobile-menu-btn');
+        const menuMobile = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            menuMobile.classList.toggle('hidden');
+        }
+
+        btnMobile.addEventListener('click', toggleMenu);
+    </script>
+
 </body>
 </html>
