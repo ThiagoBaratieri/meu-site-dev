@@ -187,5 +187,36 @@
             mainText.dispatchEvent(new Event('input'));
         }
     </script>
+
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 shadow-lg z-50 transform translate-y-full transition-transform duration-300 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-700">
+        <p class="text-sm text-center md:text-left text-slate-300">
+            Utilizamos cookies para oferecer a melhor experiência e analisar o tráfego. Ao continuar navegando, você concorda com nossa 
+            <a href="privacidade.html" class="underline text-blue-400 hover:text-blue-300">Política de Privacidade</a>.
+        </p>
+        <button onclick="acceptCookies()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg text-sm transition shadow-lg whitespace-nowrap">
+            Entendi e Aceito
+        </button>
+    </div>
+
+    <script>
+        // Lógica do Banner de Cookies
+        const banner = document.getElementById('cookie-banner');
+        
+        // Verifica se já aceitou
+        if (!localStorage.getItem('cookiesAccepted')) {
+            // Pequeno delay para a animação ficar suave ao carregar a página
+            setTimeout(() => {
+                banner.classList.remove('translate-y-full');
+            }, 1000);
+        } else {
+            banner.style.display = 'none';
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            banner.classList.add('translate-y-full');
+        }
+    </script>
+
 </body>
 </html>
