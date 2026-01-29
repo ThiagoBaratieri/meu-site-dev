@@ -8,52 +8,91 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5169492632479468" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        // 👇 ESSE CÓDIGO AQUI PREVINE O PISCAR BRANCO
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <style>
+        html { scroll-behavior: smooth; }
+        /* Ajuste para tags de código no modo escuro */
+        code {
+            @apply bg-gray-100 px-1 rounded text-red-600 font-mono text-sm;
+            @apply dark:bg-slate-900 dark:text-red-400;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased w-full dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
 
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 dark:bg-slate-900 dark:border-slate-800 transition-colors">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="index.html" class="text-2xl font-black text-blue-600 tracking-tighter hover:opacity-80 transition">DEV<span class="text-slate-400">UTIL</span></a>
+            <a href="index.html" class="text-2xl font-black text-blue-600 tracking-tighter hover:opacity-80 transition">DEV<span class="text-slate-400 dark:text-slate-500">UTIL</span></a>
             
-            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
-                <a href="index.html#text-tools" class="hover:text-blue-600">Texto</a>
-                <a href="index.html#dev-tools" class="hover:text-blue-600">Desenvolvimento</a>
-                <a href="index.html#security-tools" class="hover:text-blue-600">Segurança</a>
-                <a href="blog.html" class="text-blue-600 font-bold px-3 py-1 bg-blue-50 rounded-full hover:bg-blue-100 transition">Blog / Dicas</a>
+            <div class="hidden md:flex gap-6 items-center text-sm font-medium text-slate-600">
+                <a href="index.html#text-tools" class="hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">Texto</a>
+                <a href="index.html#dev-tools" class="hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">Desenvolvimento</a>
+                <a href="index.html#security-tools" class="hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">Segurança</a>
+                <a href="fifa-duelo.html" class="text-green-600 font-bold hover:text-green-700 dark:text-green-400 flex items-center gap-1">⚽ FIFA</a>
+                <a href="blog.html" class="text-blue-600 font-bold px-3 py-1 bg-blue-50 rounded-full hover:bg-blue-100 dark:bg-slate-800 dark:text-blue-400 transition">Blog / Dicas</a>
+
+                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors focus:outline-none ml-2">
+                    <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-slate-600 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400 dark:block" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-blue-600 focus:outline-none">
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
-            <div class="flex flex-col p-4 space-y-4 font-medium text-slate-600">
-                <a href="index.html#text-tools" class="hover:text-blue-600" onclick="toggleMenu()">Texto</a>
-                <a href="index.html#dev-tools" class="hover:text-blue-600" onclick="toggleMenu()">Desenvolvimento</a>
-                <a href="index.html#security-tools" class="hover:text-blue-600" onclick="toggleMenu()">Segurança</a>
-                <a href="blog.html" class="text-blue-600 font-bold bg-blue-50 p-3 rounded-lg text-center" onclick="toggleMenu()">Ler Blog & Dicas</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg dark:bg-slate-900 dark:border-slate-800">
+            <div class="flex flex-col p-4 space-y-4 font-medium text-slate-600 dark:text-slate-300">
+                <a href="index.html#text-tools" class="hover:text-blue-600 dark:hover:text-blue-400" onclick="toggleMenu()">Texto</a>
+                <a href="index.html#dev-tools" class="hover:text-blue-600 dark:hover:text-blue-400" onclick="toggleMenu()">Desenvolvimento</a>
+                <a href="index.html#security-tools" class="hover:text-blue-600 dark:hover:text-blue-400" onclick="toggleMenu()">Segurança</a>
+                <a href="fifa-duelo.html" class="text-green-600 font-bold hover:text-green-700 dark:text-green-400 flex items-center gap-2" onclick="toggleMenu()">⚽ Sorteador FIFA</a>
+                <a href="blog.html" class="text-blue-600 font-bold bg-blue-50 p-3 rounded-lg text-center dark:bg-slate-800 dark:text-blue-400" onclick="toggleMenu()">Ler Blog & Dicas</a>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto px-4 py-12 max-w-4xl">
-        <article class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+        <div class="mb-6">
+            <a href="blog.html" class="inline-flex items-center text-sm font-bold text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Voltar para o Blog
+            </a>
+        </div>
+        <article class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700 transition-colors">
             <header class="mb-10">
-                <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Cibersegurança</span>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mt-4 mb-6 leading-tight">Por que "123456" não serve mais: A Matemática das Senhas Fortes</h1>
-                <p class="text-slate-500 text-lg">Entenda como funcionam os ataques de força bruta e proteja seus dados hoje mesmo.</p>
+                <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide dark:bg-red-900/50 dark:text-red-200">Cibersegurança</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mt-4 mb-6 leading-tight dark:text-white">Por que "123456" não serve mais: A Matemática das Senhas Fortes</h1>
+                <p class="text-slate-500 text-lg dark:text-slate-400">Entenda como funcionam os ataques de força bruta e proteja seus dados hoje mesmo.</p>
             </header>
 
-            <div class="space-y-6 text-slate-700 leading-relaxed text-lg">
+            <div class="space-y-6 text-slate-700 leading-relaxed text-lg dark:text-slate-300">
                 <p>
                     Você sabia que uma senha de 6 caracteres (apenas letras minúsculas) pode ser descoberta por um computador moderno em menos de <strong>0,2 segundos</strong>? A capacidade de processamento aumentou, e com ela, o risco para suas contas.
                 </p>
 
-                <h2 class="text-2xl font-bold text-slate-900 mt-8">O Que é Entropia?</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mt-8 dark:text-white">O Que é Entropia?</h2>
                 <p>
                     Na segurança da informação, entropia é a medida de aleatoriedade de uma senha. Quanto maior a entropia, mais difícil é para um algoritmo adivinhar a combinação.
                 </p>
@@ -61,15 +100,15 @@
                     Uma senha como <code>senha123</code> tem baixíssima entropia porque usa palavras de dicionário e sequências lógicas. Já <code>Xj9#mP2!</code> é curta, mas tem alta entropia.
                 </p>
 
-                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 my-8 rounded-r-lg">
-                    <h3 class="font-bold text-yellow-900 mb-2">Teste Agora</h3>
-                    <p class="text-sm">
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 my-8 rounded-r-lg dark:bg-yellow-900/20 dark:border-yellow-600">
+                    <h3 class="font-bold text-yellow-900 mb-2 dark:text-yellow-100">Teste Agora</h3>
+                    <p class="text-sm dark:text-slate-300">
                         Não arrisque. Gere uma senha com alta entropia instantaneamente usando nosso 
-                        <a href="index.html#security-tools" class="text-blue-700 font-bold underline">Gerador de Senhas Seguras</a>. O processo é feito no seu navegador, garantindo privacidade total.
+                        <a href="index.html#security-tools" class="text-blue-700 font-bold underline dark:text-blue-400">Gerador de Senhas Seguras</a>. O processo é feito no seu navegador, garantindo privacidade total.
                     </p>
                 </div>
 
-                <h2 class="text-2xl font-bold text-slate-900 mt-8">A Regra dos 4 Tipos</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mt-8 dark:text-white">A Regra dos 4 Tipos</h2>
                 <p>
                     Para criar uma senha realmente forte, você deve misturar quatro tipos de caracteres:
                 </p>
@@ -84,15 +123,15 @@
                 </p>
             </div>
             
-             <div class="mt-12 pt-8 border-t border-gray-200 text-center">
-                <a href="index.html" class="inline-block bg-slate-800 text-white font-bold py-3 px-8 rounded-full hover:bg-black transition">
+             <div class="mt-12 pt-8 border-t border-gray-200 text-center dark:border-slate-700">
+                <a href="index.html" class="inline-block bg-slate-800 text-white font-bold py-3 px-8 rounded-full hover:bg-black transition dark:bg-blue-600 dark:hover:bg-blue-700">
                     Gerar Minha Senha Agora
                 </a>
             </div>
         </article>
     </main>
 
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 shadow-lg z-50 transform translate-y-full transition-transform duration-300 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-700">
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 shadow-lg z-50 transform translate-y-full transition-transform duration-300 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-700 dark:bg-slate-950">
         <p class="text-sm text-center md:text-left text-slate-300">
             Utilizamos cookies para oferecer a melhor experiência e analisar o tráfego. Ao continuar navegando, você concorda com nossa 
             <a href="privacidade.html" class="underline text-blue-400 hover:text-blue-300">Política de Privacidade</a>.
@@ -103,36 +142,45 @@
     </div>
 
     <script>
-        // Lógica do Banner de Cookies
         const banner = document.getElementById('cookie-banner');
-        
-        // Verifica se já aceitou
         if (!localStorage.getItem('cookiesAccepted')) {
-            // Pequeno delay para a animação ficar suave ao carregar a página
-            setTimeout(() => {
-                banner.classList.remove('translate-y-full');
-            }, 1000);
-        } else {
-            banner.style.display = 'none';
-        }
-
+            setTimeout(() => { banner.classList.remove('translate-y-full'); }, 1000);
+        } else { banner.style.display = 'none'; }
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
             banner.classList.add('translate-y-full');
         }
     </script>
-    
+
     <script>
         // Lógica do Menu Mobile
         const btnMobile = document.getElementById('mobile-menu-btn');
         const menuMobile = document.getElementById('mobile-menu');
+        function toggleMenu() { menuMobile.classList.toggle('hidden'); }
+        btnMobile.addEventListener('click', toggleMenu);
 
-        function toggleMenu() {
-            menuMobile.classList.toggle('hidden');
+        // Lógica do Dark Mode
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // 1. Verifica preferência ao carregar
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
         }
 
-        btnMobile.addEventListener('click', toggleMenu);
+        // 2. Evento de clique
+        themeToggleBtn.addEventListener('click', function() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
     </script>
 
-    </body>
+</body>
 </html>

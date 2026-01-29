@@ -6,52 +6,88 @@
     <title>O que é JSON? O Guia Completo para Iniciantes - DevUtil</title>
     <meta name="description" content="Entenda o que é JSON, sua sintaxe, diferenças para o XML e por que ele é o padrão essencial para APIs e desenvolvimento web moderno.">
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5169492632479468"
-     crossorigin="anonymous"></script>
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5169492632479468" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-</head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        // 👇 ESSE CÓDIGO AQUI PREVINE O PISCAR BRANCO
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <style>
+        html { scroll-behavior: smooth; }
+        /* Ajuste para tags de código */
+        code {
+            @apply bg-gray-100 px-1 rounded text-red-600 font-mono text-sm;
+            @apply dark:bg-slate-900 dark:text-red-400;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased w-full dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 dark:bg-slate-900 dark:border-slate-800 transition-colors">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="index.html" class="text-2xl font-black text-blue-600 tracking-tighter hover:opacity-80 transition">DEV<span class="text-slate-400">UTIL</span></a>
+            <a href="index.html" class="text-2xl font-black text-blue-600 tracking-tighter hover:opacity-80 transition">DEV<span class="text-slate-400 dark:text-slate-500">UTIL</span></a>
             
-            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
-                <a href="index.html#text-tools" class="hover:text-blue-600">Texto</a>
-                <a href="index.html#dev-tools" class="hover:text-blue-600">Desenvolvimento</a>
-                <a href="index.html#security-tools" class="hover:text-blue-600">Segurança</a>
-                <a href="blog.html" class="text-blue-600 font-bold px-3 py-1 bg-blue-50 rounded-full hover:bg-blue-100 transition">Blog / Dicas</a>
+            <div class="hidden md:flex gap-6 items-center text-sm font-medium text-slate-600">
+                <a href="index.html#text-tools" class="hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">Texto</a>
+                <a href="index.html#dev-tools" class="hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">Desenvolvimento</a>
+                <a href="index.html#security-tools" class="hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">Segurança</a>
+                <a href="fifa-duelo.html" class="text-green-600 font-bold hover:text-green-700 dark:text-green-400 flex items-center gap-1">⚽ FIFA</a>
+                <a href="blog.html" class="text-blue-600 font-bold px-3 py-1 bg-blue-50 rounded-full hover:bg-blue-100 dark:bg-slate-800 dark:text-blue-400 transition">Blog / Dicas</a>
+
+                <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors focus:outline-none ml-2">
+                    <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-slate-600 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400 dark:block" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-blue-600 focus:outline-none">
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
-            <div class="flex flex-col p-4 space-y-4 font-medium text-slate-600">
-                <a href="index.html#text-tools" class="hover:text-blue-600" onclick="toggleMenu()">Texto</a>
-                <a href="index.html#dev-tools" class="hover:text-blue-600" onclick="toggleMenu()">Desenvolvimento</a>
-                <a href="index.html#security-tools" class="hover:text-blue-600" onclick="toggleMenu()">Segurança</a>
-                <a href="blog.html" class="text-blue-600 font-bold bg-blue-50 p-3 rounded-lg text-center" onclick="toggleMenu()">Ler Blog & Dicas</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg dark:bg-slate-900 dark:border-slate-800">
+            <div class="flex flex-col p-4 space-y-4 font-medium text-slate-600 dark:text-slate-300">
+                <a href="index.html#text-tools" class="hover:text-blue-600 dark:hover:text-blue-400" onclick="toggleMenu()">Texto</a>
+                <a href="index.html#dev-tools" class="hover:text-blue-600 dark:hover:text-blue-400" onclick="toggleMenu()">Desenvolvimento</a>
+                <a href="index.html#security-tools" class="hover:text-blue-600 dark:hover:text-blue-400" onclick="toggleMenu()">Segurança</a>
+                <a href="fifa-duelo.html" class="text-green-600 font-bold hover:text-green-700 dark:text-green-400 flex items-center gap-2" onclick="toggleMenu()">⚽ Sorteador FIFA</a>
+                <a href="blog.html" class="text-blue-600 font-bold bg-blue-50 p-3 rounded-lg text-center dark:bg-slate-800 dark:text-blue-400" onclick="toggleMenu()">Ler Blog & Dicas</a>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto px-4 py-12 max-w-4xl">
-        
-        <article class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+        <div class="mb-6">
+            <a href="index.html" class="inline-flex items-center text-sm font-bold text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Voltar para Home
+            </a>
+        </div>
+        <article class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700 transition-colors">
             <header class="mb-10 text-center">
-                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Desenvolvimento Web</span>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mt-4 mb-6 leading-tight">O que é JSON e por que ele se tornou o "Esperanto" da Web?</h1>
-                <p class="text-slate-500 text-lg">Entenda a estrutura de dados que conecta o front-end ao back-end e aprenda a evitar os erros mais comuns de sintaxe.</p>
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide dark:bg-blue-900/50 dark:text-blue-200">Desenvolvimento Web</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mt-4 mb-6 leading-tight dark:text-white">O que é JSON e por que ele se tornou o "Esperanto" da Web?</h1>
+                <p class="text-slate-500 text-lg dark:text-slate-400">Entenda a estrutura de dados que conecta o front-end ao back-end e aprenda a evitar os erros mais comuns de sintaxe.</p>
             </header>
 
-            <div class="space-y-6 text-slate-700 leading-relaxed text-lg">
+            <div class="space-y-6 text-slate-700 leading-relaxed text-lg dark:text-slate-300">
                 <p>
                     Se você está começando no mundo da programação, com certeza já ouviu falar em <strong>JSON</strong> (JavaScript Object Notation). Ele está em todo lugar: nas configurações do VS Code, nas respostas de APIs e até em bancos de dados NoSQL.
                 </p>
@@ -59,7 +95,7 @@
                     Mas por que essa estrutura simples de chaves <code>{}</code> e colchetes <code>[]</code> desbancou o antigo gigante XML e se tornou o padrão absoluto da web?
                 </p>
 
-                <h2 class="text-2xl font-bold text-slate-900 mt-8">A Simplicidade Venceu</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mt-8 dark:text-white">A Simplicidade Venceu</h2>
                 <p>
                     O JSON foi popularizado por Douglas Crockford no início dos anos 2000. A ideia era ter um formato de troca de dados que fosse <strong>legível por humanos</strong> e fácil de ser interpretado por máquinas.
                 </p>
@@ -67,7 +103,7 @@
                     Diferente do XML, que exige tags de abertura e fechamento verbosas (ex: <code>&lt;nome&gt;Thiago&lt;/nome&gt;</code>), o JSON é direto ao ponto: <code>{"nome": "Thiago"}</code>. Isso economiza banda de internet e processamento.
                 </p>
 
-                <h2 class="text-2xl font-bold text-slate-900 mt-8">A Sintaxe Básica</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mt-8 dark:text-white">A Sintaxe Básica</h2>
                 <p>
                     Para um JSON ser válido, ele precisa seguir regras estritas. É aqui que muitos desenvolvedores travam suas aplicações. As regras de ouro são:
                 </p>
@@ -77,29 +113,29 @@
                     <li>Aspas simples <code>'</code> não são permitidas, apenas aspas duplas <code>"</code>.</li>
                 </ul>
 
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg">
-                    <h3 class="font-bold text-blue-900 mb-2">Dica de Ferramenta</h3>
-                    <p class="text-sm">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg dark:bg-blue-900/20 dark:border-blue-600">
+                    <h3 class="font-bold text-blue-900 mb-2 dark:text-blue-200">Dica de Ferramenta</h3>
+                    <p class="text-sm dark:text-slate-300">
                         Está com um código JSON gigante e não sabe onde está o erro? Use nosso 
-                        <a href="index.html#dev-tools" class="text-blue-700 font-bold underline decoration-2 hover:text-blue-900">Formatador e Validador JSON</a> 
+                        <a href="index.html#dev-tools" class="text-blue-700 font-bold underline decoration-2 hover:text-blue-900 dark:text-blue-400">Formatador e Validador JSON</a> 
                         gratuito para encontrar a falha instantaneamente e identar o código.
                     </p>
                 </div>
 
-                <h2 class="text-2xl font-bold text-slate-900 mt-8">JSON vs Objeto JavaScript</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mt-8 dark:text-white">JSON vs Objeto JavaScript</h2>
                 <p>
                     Embora o nome seja "JavaScript Object Notation", JSON não é a mesma coisa que um objeto JS. O JSON é um formato de <strong>texto</strong> (string).
                 </p>
                 <p>
                     Para usar um JSON que vem do servidor no seu código JavaScript, você precisa "parsear" ele:
                 </p>
-                <pre class="bg-slate-900 text-green-400 p-4 rounded-lg text-sm overflow-x-auto my-4"><code>const dados = JSON.parse(respostaDoServidor);</code></pre>
+                <pre class="bg-slate-900 text-green-400 p-4 rounded-lg text-sm overflow-x-auto my-4 border border-slate-700"><code>const dados = JSON.parse(respostaDoServidor);</code></pre>
                 <p>
                     E para enviar dados do seu código para uma API, você precisa transformá-lo em string:
                 </p>
-                <pre class="bg-slate-900 text-green-400 p-4 rounded-lg text-sm overflow-x-auto my-4"><code>const jsonParaEnviar = JSON.stringify(meuObjeto);</code></pre>
+                <pre class="bg-slate-900 text-green-400 p-4 rounded-lg text-sm overflow-x-auto my-4 border border-slate-700"><code>const jsonParaEnviar = JSON.stringify(meuObjeto);</code></pre>
 
-                <h2 class="text-2xl font-bold text-slate-900 mt-8">Conclusão</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mt-8 dark:text-white">Conclusão</h2>
                 <p>
                     Dominar a estrutura JSON é o primeiro passo para se tornar um desenvolvedor Full Stack. É a linguagem universal que permite que um site feito em React converse com um servidor em Python, Java ou PHP.
                 </p>
@@ -108,25 +144,25 @@
                 </p>
             </div>
 
-            <div class="mt-16 border-t border-gray-200 pt-10">
-                <h3 class="font-bold text-2xl text-slate-800 mb-6">Mais Dicas do DevUtil</h3>
+            <div class="mt-16 border-t border-gray-200 pt-10 dark:border-slate-700">
+                <h3 class="font-bold text-2xl text-slate-800 mb-6 dark:text-white">Mais Dicas do DevUtil</h3>
                 
                 <div class="grid md:grid-cols-2 gap-6">
-                    <a href="artigo-senhas.html" class="group block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:bg-white hover:shadow-md transition">
+                    <a href="artigo-senhas.html" class="group block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:bg-white hover:shadow-md transition dark:bg-slate-700 dark:border-slate-600 dark:hover:bg-slate-600">
                         <span class="text-xs font-bold text-red-500 uppercase">Segurança</span>
-                        <h4 class="font-bold text-lg text-slate-900 mt-2 group-hover:text-blue-600 transition">Por que "123456" não serve mais?</h4>
-                        <p class="text-slate-600 text-sm mt-2 line-clamp-2">Entenda a entropia e matemática por trás da segurança de senhas.</p>
+                        <h4 class="font-bold text-lg text-slate-900 mt-2 group-hover:text-blue-600 transition dark:text-white dark:group-hover:text-blue-400">Por que "123456" não serve mais?</h4>
+                        <p class="text-slate-600 text-sm mt-2 line-clamp-2 dark:text-slate-300">Entenda a entropia e matemática por trás da segurança de senhas.</p>
                     </a>
 
-                    <a href="artigo-produtividade.html" class="group block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:bg-white hover:shadow-md transition">
+                    <a href="artigo-produtividade.html" class="group block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:bg-white hover:shadow-md transition dark:bg-slate-700 dark:border-slate-600 dark:hover:bg-slate-600">
                         <span class="text-xs font-bold text-green-600 uppercase">Produtividade</span>
-                        <h4 class="font-bold text-lg text-slate-900 mt-2 group-hover:text-blue-600 transition">SEO e Design: A importância dos detalhes</h4>
-                        <p class="text-slate-600 text-sm mt-2 line-clamp-2">Por que contar caracteres é vital para redes sociais e como o Lorem Ipsum ajuda no design.</p>
+                        <h4 class="font-bold text-lg text-slate-900 mt-2 group-hover:text-blue-600 transition dark:text-white dark:group-hover:text-blue-400">SEO e Design: A importância dos detalhes</h4>
+                        <p class="text-slate-600 text-sm mt-2 line-clamp-2 dark:text-slate-300">Por que contar caracteres é vital para redes sociais e como o Lorem Ipsum ajuda no design.</p>
                     </a>
                 </div>
             </div>
 
-            <div class="mt-12 pt-8 border-t border-gray-200 text-center">
+            <div class="mt-12 pt-8 border-t border-gray-200 text-center dark:border-slate-700">
                 <a href="index.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                     Voltar para as Ferramentas
                 </a>
@@ -134,7 +170,7 @@
         </article>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 mt-10">
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-10 dark:bg-slate-950 dark:border-t dark:border-slate-800">
         <div class="container mx-auto px-4 text-center">
             <p class="mb-4">© 2025 DevUtil - Ferramentas de Código Aberto.</p>
             <div class="flex justify-center gap-6 text-sm">
@@ -145,7 +181,7 @@
         </div>
     </footer>
 
-    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 shadow-lg z-50 transform translate-y-full transition-transform duration-300 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-700">
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 shadow-lg z-50 transform translate-y-full transition-transform duration-300 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-700 dark:bg-slate-950">
         <p class="text-sm text-center md:text-left text-slate-300">
             Utilizamos cookies para oferecer a melhor experiência e analisar o tráfego. Ao continuar navegando, você concorda com nossa 
             <a href="privacidade.html" class="underline text-blue-400 hover:text-blue-300">Política de Privacidade</a>.
@@ -158,17 +194,9 @@
     <script>
         // Lógica do Banner de Cookies
         const banner = document.getElementById('cookie-banner');
-        
-        // Verifica se já aceitou
         if (!localStorage.getItem('cookiesAccepted')) {
-            // Pequeno delay para a animação ficar suave ao carregar a página
-            setTimeout(() => {
-                banner.classList.remove('translate-y-full');
-            }, 1000);
-        } else {
-            banner.style.display = 'none';
-        }
-
+            setTimeout(() => { banner.classList.remove('translate-y-full'); }, 1000);
+        } else { banner.style.display = 'none'; }
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
             banner.classList.add('translate-y-full');
@@ -185,6 +213,26 @@
         }
 
         btnMobile.addEventListener('click', toggleMenu);
+
+        // Lógica do Dark Mode
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
     </script>
 
 </body>

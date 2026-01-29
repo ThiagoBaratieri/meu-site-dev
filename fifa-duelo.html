@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteador de Times EA FC 24, 25 e 26 - Duelos Equilibrados | DevUtil</title>
+    <meta name="description" content="Sorteie duelos justos para suas partidas de FIFA / EA FC. Filtre por versão do jogo e divirta-se com amigos sem brigas na hora de escolher os times.">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5169492632479468" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+    <style>
+        .card-team {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            transition: all 0.3s ease;
+        }
+        .stat-bar { height: 6px; border-radius: 3px; @apply bg-slate-700; }
+        .stat-fill { height: 100%; border-radius: 3px; transition: width 1s ease-out; }
+        
+        /* Animação de Sorteio */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .shaking { animation: shake 0.5s; animation-iteration-count: infinite; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 antialiased min-h-screen flex flex-col">
+
+    <nav class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black text-white tracking-tighter hover:text-green-400 transition">DEV<span class="text-green-500">GAMES</span></a>
+            
+            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-400">
+                <a href="index.html" class="hover:text-white">Voltar para Ferramentas</a>
+            </div>
+            
+             <button id="mobile-menu-btn" class="md:hidden p-2 text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
+            <div class="flex flex-col p-4 space-y-4 font-medium text-slate-300">
+                <a href="index.html" class="hover:text-white block">Voltar para Ferramentas</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4">Sorteador de Duelo EA FC</h1>
+            <p class="text-slate-400">Acabe com a briga na hora de escolher os times. Selecione a versão e deixe a sorte decidir.</p>
+        </header>
+
+        <div class="max-w-xl mx-auto bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-700 mb-10">
+            <label class="block text-sm font-bold text-slate-400 mb-2">Escolha a Versão do Jogo:</label>
+            <select id="versionSelect" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:ring-2 focus:ring-green-500 outline-none mb-6">
+                <option value="EA FC 26">EA FC 26</option>
+                <option value="EA FC 25">EA FC 25</option>
+                <option value="EA FC 24">EA FC 24</option>
+            </select>
+
+            <button onclick="sortear()" id="btnSortear" class="w-full bg-green-600 hover:bg-green-500 text-white font-black text-xl py-4 rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+                🎲 SORTEAR DUELO
+            </button>
+        </div>
+
+        <div id="arena" class="hidden grid md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
+            
+            <div class="card-team p-6 rounded-2xl border border-slate-700 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-slate-800 px-3 py-1 rounded-bl-lg text-xs font-bold text-slate-400" id="ligaA">LIGA</div>
+                <div class="flex flex-col items-center mb-4">
+                    <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mb-4 text-3xl shadow-inner">
+                        🛡️ </div>
+                    <h2 class="text-2xl font-bold text-white text-center" id="nomeA">Time A</h2>
+                    <div class="text-4xl font-black text-green-400 mt-2" id="ovrA">85</div>
+                    <span class="text-xs text-slate-500 uppercase tracking-widest">Overall</span>
+                </div>
+                
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1"><span>ATAQUE</span><span id="attA">0</span></div>
+                        <div class="stat-bar"><div id="barAttA" class="stat-fill bg-red-500" style="width: 0%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1"><span>MEIO</span><span id="midA">0</span></div>
+                        <div class="stat-bar"><div id="barMidA" class="stat-fill bg-yellow-500" style="width: 0%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1"><span>DEFESA</span><span id="defA">0</span></div>
+                        <div class="stat-bar"><div id="barDefA" class="stat-fill bg-blue-500" style="width: 0%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <span class="text-5xl font-black text-slate-700 italic">VS</span>
+            </div>
+
+            <div class="card-team p-6 rounded-2xl border border-slate-700 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-slate-800 px-3 py-1 rounded-bl-lg text-xs font-bold text-slate-400" id="ligaB">LIGA</div>
+                <div class="flex flex-col items-center mb-4">
+                    <div class="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mb-4 text-3xl shadow-inner">
+                        🛡️
+                    </div>
+                    <h2 class="text-2xl font-bold text-white text-center" id="nomeB">Time B</h2>
+                    <div class="text-4xl font-black text-green-400 mt-2" id="ovrB">81</div>
+                    <span class="text-xs text-slate-500 uppercase tracking-widest">Overall</span>
+                </div>
+                
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1"><span>ATAQUE</span><span id="attB">0</span></div>
+                        <div class="stat-bar"><div id="barAttB" class="stat-fill bg-red-500" style="width: 0%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1"><span>MEIO</span><span id="midB">0</span></div>
+                        <div class="stat-bar"><div id="barMidB" class="stat-fill bg-yellow-500" style="width: 0%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1"><span>DEFESA</span><span id="defB">0</span></div>
+                        <div class="stat-bar"><div id="barDefB" class="stat-fill bg-blue-500" style="width: 0%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <article class="mt-20 max-w-3xl mx-auto prose prose-invert">
+            <h3>Como funciona o Sorteador?</h3>
+            <p>Este algoritmo utiliza um banco de dados atualizado das versões <strong>EA FC 24, 25 e 26</strong>. Ao clicar em sortear, ele seleciona aleatoriamente dois clubes da base de dados selecionada.</p>
+            <p>Ideal para campeonatos rápidos com amigos, garantindo que ninguém escolha sempre o time mais forte ("apelão").</p>
+        </article>
+
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-500 py-8 text-center mt-auto">
+        <p>© 2025 DevUtil Games. Não filiado à Electronic Arts.</p>
+    </footer>
+
+    <script>
+        // DADOS DO JSON (Colocados aqui para rodar direto)
+        const timesData = [
+            // EA FC 24 [cite: 1]
+            { "id": 201, "nome": "Manchester City", "overall": 85, "liga": "Premier League", "ataque": 86, "meio_campo": 87, "defesa": 84, "versao_jogo": "EA FC 24" },
+            { "id": 202, "nome": "Real Madrid", "overall": 85, "liga": "La Liga", "ataque": 85, "meio_campo": 85, "defesa": 84, "versao_jogo": "EA FC 24" },
+            { "id": 203, "nome": "Bayern Munique", "overall": 84, "liga": "Bundesliga", "ataque": 90, "meio_campo": 84, "defesa": 83, "versao_jogo": "EA FC 24" },
+            { "id": 204, "nome": "FC Barcelona", "overall": 84, "liga": "La Liga", "ataque": 84, "meio_campo": 84, "defesa": 84, "versao_jogo": "EA FC 24" },
+            { "id": 205, "nome": "Arsenal", "overall": 83, "liga": "Premier League", "ataque": 83, "meio_campo": 85, "defesa": 82, "versao_jogo": "EA FC 24" },
+            { "id": 206, "nome": "Liverpool", "overall": 83, "liga": "Premier League", "ataque": 84, "meio_campo": 80, "defesa": 83, "versao_jogo": "EA FC 24" },
+            { "id": 207, "nome": "Inter de Milão", "overall": 83, "liga": "Serie A", "ataque": 83, "meio_campo": 83, "defesa": 82, "versao_jogo": "EA FC 24" },
+            { "id": 208, "nome": "Paris Saint-Germain", "overall": 83, "liga": "Ligue 1", "ataque": 84, "meio_campo": 81, "defesa": 81, "versao_jogo": "EA FC 24" },
+            { "id": 209, "nome": "Bayer 04 Leverkusen", "overall": 82, "liga": "Bundesliga", "ataque": 82, "meio_campo": 83, "defesa": 81, "versao_jogo": "EA FC 24" },
+            { "id": 210, "nome": "Atlético de Madrid", "overall": 82, "liga": "La Liga", "ataque": 84, "meio_campo": 83, "defesa": 81, "versao_jogo": "EA FC 24" },
+            { "id": 211, "nome": "Aston Villa", "overall": 81, "liga": "Premier League", "ataque": 83, "meio_campo": 79, "defesa": 78, "versao_jogo": "EA FC 24" },
+            { "id": 212, "nome": "Manchester United", "overall": 81, "liga": "Premier League", "ataque": 78, "meio_campo": 78, "defesa": 82, "versao_jogo": "EA FC 24" },
+            { "id": 213, "nome": "Tottenham Hotspur", "overall": 81, "liga": "Premier League", "ataque": 81, "meio_campo": 81, "defesa": 80, "versao_jogo": "EA FC 24" },
+            { "id": 214, "nome": "Borussia Dortmund", "overall": 81, "liga": "Bundesliga", "ataque": 81, "meio_campo": 82, "defesa": 81, "versao_jogo": "EA FC 24" },
+            { "id": 215, "nome": "AC Milan", "overall": 81, "liga": "Serie A", "ataque": 78, "meio_campo": 82, "defesa": 80, "versao_jogo": "EA FC 24" },
+
+            // EA FC 25 [cite: 9]
+            { "id": 301, "nome": "Manchester City", "overall": 85, "liga": "Premier League", "ataque": 86, "meio_campo": 83, "defesa": 79, "versao_jogo": "EA FC 25" },
+            { "id": 302, "nome": "Real Madrid", "overall": 85, "liga": "La Liga", "ataque": 88, "meio_campo": 86, "defesa": 81, "versao_jogo": "EA FC 25" },
+            { "id": 303, "nome": "Liverpool", "overall": 84, "liga": "Premier League", "ataque": 82, "meio_campo": 83, "defesa": 85, "versao_jogo": "EA FC 25" },
+            { "id": 304, "nome": "Bayern Munique", "overall": 84, "liga": "Bundesliga", "ataque": 90, "meio_campo": 84, "defesa": 82, "versao_jogo": "EA FC 25" },
+            { "id": 305, "nome": "Inter de Milão", "overall": 84, "liga": "Serie A", "ataque": 86, "meio_campo": 84, "defesa": 83, "versao_jogo": "EA FC 25" },
+            { "id": 306, "nome": "FC Barcelona", "overall": 84, "liga": "La Liga", "ataque": 85, "meio_campo": 85, "defesa": 83, "versao_jogo": "EA FC 25" },
+            { "id": 307, "nome": "Arsenal", "overall": 83, "liga": "Premier League", "ataque": 83, "meio_campo": 85, "defesa": 81, "versao_jogo": "EA FC 25" },
+            { "id": 308, "nome": "Bayer Leverkusen", "overall": 83, "liga": "Bundesliga", "ataque": 83, "meio_campo": 84, "defesa": 83, "versao_jogo": "EA FC 25" },
+            { "id": 309, "nome": "Paris Saint-Germain", "overall": 83, "liga": "Ligue 1", "ataque": 83, "meio_campo": 83, "defesa": 84, "versao_jogo": "EA FC 25" },
+            { "id": 310, "nome": "Atletico de Madrid", "overall": 82, "liga": "La Liga", "ataque": 84, "meio_campo": 80, "defesa": 81, "versao_jogo": "EA FC 25" },
+            { "id": 311, "nome": "Aston Villa", "overall": 81, "liga": "Premier League", "ataque": 84, "meio_campo": 80, "defesa": 80, "versao_jogo": "EA FC 25" },
+            { "id": 312, "nome": "Newcastle United", "overall": 81, "liga": "Premier League", "ataque": 81, "meio_campo": 80, "defesa": 80, "versao_jogo": "EA FC 25" },
+            { "id": 313, "nome": "Tottenham Hotspur", "overall": 81, "liga": "Premier League", "ataque": 80, "meio_campo": 83, "defesa": 81, "versao_jogo": "EA FC 25" },
+            { "id": 314, "nome": "Borussia Dortmund", "overall": 81, "liga": "Bundesliga", "ataque": 82, "meio_campo": 79, "defesa": 81, "versao_jogo": "EA FC 25" },
+            { "id": 315, "nome": "AC Milan", "overall": 81, "liga": "Serie A", "ataque": 79, "meio_campo": 82, "defesa": 78, "versao_jogo": "EA FC 25" },
+
+            // EA FC 26 [cite: 17]
+            { "id": 401, "nome": "Liverpool", "overall": 85, "liga": "Premier League", "ataque": 85, "meio_campo": 86, "defesa": 82, "versao_jogo": "EA FC 26" },
+            { "id": 402, "nome": "Paris Saint-Germain", "overall": 85, "liga": "Ligue 1", "ataque": 84, "meio_campo": 86, "defesa": 84, "versao_jogo": "EA FC 26" },
+            { "id": 403, "nome": "Real Madrid", "overall": 85, "liga": "La Liga", "ataque": 90, "meio_campo": 84, "defesa": 82, "versao_jogo": "EA FC 26" },
+            { "id": 404, "nome": "Arsenal", "overall": 84, "liga": "Premier League", "ataque": 85, "meio_campo": 85, "defesa": 84, "versao_jogo": "EA FC 26" },
+            { "id": 405, "nome": "Manchester City", "overall": 91, "liga": "Premier League", "ataque": 90, "meio_campo": 91, "defesa": 88, "versao_jogo": "EA FC 26" },
+            { "id": 406, "nome": "Bayern München", "overall": 84, "liga": "Bundesliga", "ataque": 89, "meio_campo": 84, "defesa": 83, "versao_jogo": "EA FC 26" },
+            { "id": 407, "nome": "FC Barcelona", "overall": 84, "liga": "La Liga", "ataque": 85, "meio_campo": 85, "defesa": 81, "versao_jogo": "EA FC 26" },
+            { "id": 408, "nome": "Inter de Milão", "overall": 83, "liga": "Serie A", "ataque": 86, "meio_campo": 83, "defesa": 83, "versao_jogo": "EA FC 26" },
+            { "id": 409, "nome": "Atlético Madrid", "overall": 82, "liga": "La Liga", "ataque": 84, "meio_campo": 81, "defesa": 82, "versao_jogo": "EA FC 26" },
+            { "id": 410, "nome": "Chelsea", "overall": 81, "liga": "Premier League", "ataque": 80, "meio_campo": 82, "defesa": 80, "versao_jogo": "EA FC 26" },
+            { "id": 411, "nome": "Newcastle United", "overall": 81, "liga": "Premier League", "ataque": 81, "meio_campo": 84, "defesa": 80, "versao_jogo": "EA FC 26" },
+            { "id": 412, "nome": "Borussia Dortmund", "overall": 81, "liga": "Bundesliga", "ataque": 83, "meio_campo": 80, "defesa": 80, "versao_jogo": "EA FC 26" },
+            { "id": 413, "nome": "AC Milan", "overall": 81, "liga": "Serie A", "ataque": 82, "meio_campo": 82, "defesa": 76, "versao_jogo": "EA FC 26" },
+            { "id": 414, "nome": "Napoli", "overall": 81, "liga": "Serie A", "ataque": 79, "meio_campo": 82, "defesa": 80, "versao_jogo": "EA FC 26" },
+            { "id": 415, "nome": "Aston Villa", "overall": 80, "liga": "Premier League", "ataque": 82, "meio_campo": 80, "defesa": 80, "versao_jogo": "EA FC 26" }
+        ];
+
+        // LOGICA DO SORTEIO
+        const arena = document.getElementById('arena');
+        const btnSortear = document.getElementById('btnSortear');
+        
+        // Elementos Time A
+        const elsA = {
+            nome: document.getElementById('nomeA'),
+            ovr: document.getElementById('ovrA'),
+            liga: document.getElementById('ligaA'),
+            att: document.getElementById('attA'), barAtt: document.getElementById('barAttA'),
+            mid: document.getElementById('midA'), barMid: document.getElementById('barMidA'),
+            def: document.getElementById('defA'), barDef: document.getElementById('barDefA'),
+        };
+
+        // Elementos Time B
+        const elsB = {
+            nome: document.getElementById('nomeB'),
+            ovr: document.getElementById('ovrB'),
+            liga: document.getElementById('ligaB'),
+            att: document.getElementById('attB'), barAtt: document.getElementById('barAttB'),
+            mid: document.getElementById('midB'), barMid: document.getElementById('barMidB'),
+            def: document.getElementById('defB'), barDef: document.getElementById('barDefB'),
+        };
+
+        function atualizarCard(els, time) {
+            els.nome.innerText = time.nome;
+            els.ovr.innerText = time.overall;
+            els.liga.innerText = time.liga;
+            
+            els.att.innerText = time.ataque;
+            els.mid.innerText = time.meio_campo;
+            els.def.innerText = time.defesa;
+
+            // Zera as barras primeiro para animar
+            els.barAtt.style.width = '0%';
+            els.barMid.style.width = '0%';
+            els.barDef.style.width = '0%';
+            
+            setTimeout(() => {
+                els.barAtt.style.width = time.ataque + '%';
+                els.barMid.style.width = time.meio_campo + '%';
+                els.barDef.style.width = time.defesa + '%';
+            }, 100);
+        }
+
+        function sortear() {
+            const versao = document.getElementById('versionSelect').value;
+            
+            // 1. Filtrar pela versão escolhida
+            const timesFiltrados = timesData.filter(t => t.versao_jogo === versao);
+            
+            if (timesFiltrados.length < 2) {
+                alert("Erro: Não há times suficientes nesta versão.");
+                return;
+            }
+
+            // Efeito Visual
+            btnSortear.innerText = "SORTEANDO...";
+            btnSortear.classList.add('shaking');
+            arena.classList.add('hidden');
+
+            setTimeout(() => {
+                // 2. Sortear dois índices diferentes
+                const idx1 = Math.floor(Math.random() * timesFiltrados.length);
+                let idx2 = Math.floor(Math.random() * timesFiltrados.length);
+                
+                while (idx1 === idx2) {
+                    idx2 = Math.floor(Math.random() * timesFiltrados.length);
+                }
+
+                const timeA = timesFiltrados[idx1];
+                const timeB = timesFiltrados[idx2];
+
+                // 3. Atualizar a tela
+                atualizarCard(elsA, timeA);
+                atualizarCard(elsB, timeB);
+
+                arena.classList.remove('hidden');
+                btnSortear.innerText = "🎲 SORTEAR NOVAMENTE";
+                btnSortear.classList.remove('shaking');
+                
+            }, 600); // Delay dramático
+        }
+        
+        // Menu Mobile (Copiado da Home)
+        const btnMobile = document.getElementById('mobile-menu-btn');
+        const menuMobile = document.getElementById('mobile-menu');
+        btnMobile.addEventListener('click', () => {
+            menuMobile.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
