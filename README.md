@@ -44,7 +44,7 @@ Para rodar este projeto na sua máquina, siga os passos abaixo:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/SEU-USUARIO/devutil.git](https://github.com/SEU-USUARIO/devutil.git)
+    git clone https://github.com/ThiagoBaratieri/meu-site-dev.git
     ```
 
 2.  **Abra a pasta do projeto:**
