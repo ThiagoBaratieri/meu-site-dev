@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 01 - Python na Vida Real | DevUtil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        .sidebar-active { border-right: 4px solid #3b82f6; background: rgba(59, 130, 246, 0.1); }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 font-sans antialiased flex h-screen overflow-hidden">
+
+    <div id="sidebar-overlay" onclick="toggleMenu()" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+
+    <aside id="sidebar" class="w-72 bg-slate-950 border-r border-slate-800 flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
+        
+        <div class="p-6 border-b border-slate-800">
+            <a href="../index.html" class="text-sm text-blue-400 hover:text-blue-300 transition flex items-center gap-2">
+                ← Voltar para Cursos
+            </a>
+            <h2 class="text-xl font-bold text-white mt-4 tracking-tight">Python na Vida Real</h2>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto p-4 space-y-2">
+            <div class="mb-6">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Módulo 1: Introdução</p>
+                <a href="index.html" data-id="python-aula-01" class="aula-item sidebar-active flex items-center gap-3 p-3 rounded-lg text-sm font-medium text-white">
+                    <span class="bolinha-status w-5 h-5 flex items-center justify-center bg-blue-600 rounded-full text-[10px]">1</span>
+                    Aula 01: O Mundo Real
+                </a>
+
+                <a href="aula-02.html" data-id="python-aula-02" class="aula-item flex items-center gap-3 p-3 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-900 hover:text-white transition">
+                    <span class="bolinha-status w-5 h-5 flex items-center justify-center bg-slate-800 rounded-full text-[10px]">2</span>
+                    Aula 02: A Lógica dos Dados
+                </a>
+            </div>
+        </nav>
+
+        <div class="p-4 border-t border-slate-800 bg-slate-900/50">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 px-2">Comunidade</p>
+            
+            <a href="https://www.tiktok.com/@kiritodev77" target="_blank" class="flex items-center gap-3 p-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition mb-1">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                Assista no TikTok
+            </a>
+            
+            <a href="https://discord.gg/8jsD463svX" target="_blank" class="flex items-center gap-3 p-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-indigo-900/50 hover:text-indigo-400 transition">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                Comunidade no Discord
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto bg-slate-900">
+        
+        <header class="md:hidden p-4 bg-slate-950 border-b border-slate-800 flex justify-between items-center sticky top-0 z-10">
+            <a href="../index.html" class="text-sm text-blue-400">← Voltar</a>
+            <span class="font-bold text-white">Aula 01</span>
+            
+            <button onclick="toggleMenu()" class="text-blue-400 hover:text-white flex items-center gap-2 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </header>
+
+        <div class="max-w-3xl mx-auto px-6 py-12">
+            
+            <div class="mb-10 border-b border-slate-800 pb-8 mt-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Módulo 1</span>
+                    <span class="text-slate-500 text-sm">Tempo estimado: 10 min</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">O Python como seu Funcionário Mais Eficiente</h1>
+                <p class="text-slate-400 text-lg">Nesta aula, vamos entender por que o Python é a escolha número 1 para automação de negócios e preparar seu "escritório digital" para começar a codar.</p>
+            </div>
+
+            <article id="conteudo-aula" class="prose prose-invert prose-lg max-w-none">
+                
+                <h2 class="text-2xl font-bold text-blue-400 mt-8 mb-4">1. O que é Programação (Para quem tem pressa)</h2>
+                <p class="text-slate-300">Imagine que você tem um novo gerente em uma de suas filiais. Para ele funcionar, você precisa dar um <strong>Procedimento Operacional Padrão (POP)</strong>: <em>"Se o caixa fechar com diferença negativa, me avise; se o estoque de leite baixar de 50 unidades, faça o pedido"</em>.</p>
+                
+                <div class="bg-slate-800/50 border-l-4 border-blue-500 p-6 rounded-r-lg my-6">
+                    <p class="italic text-slate-300 m-0">Programar é simplesmente escrever o POP da sua empresa em uma linguagem que o computador entenda. O Python é essa linguagem: simples, direta e poderosa.</p>
+                </div>
+
+                <h2 class="text-2xl font-bold text-blue-400 mt-10 mb-4">2. Por que Python e não "apenas" Excel?</h2>
+                <p class="text-slate-300">O Excel é fantástico, mas ele tem limites. Quando você precisa:</p>
+                <ul class="list-disc pl-6 text-slate-300 space-y-2 mb-8">
+                    <li>Cruzar dados de três filiais diferentes que usam sistemas distintos.</li>
+                    <li>Baixar notas fiscais do site da prefeitura automaticamente.</li>
+                    <li>Enviar relatórios personalizados para o WhatsApp de cada funcionário.</li>
+                </ul>
+                <p class="text-slate-300 font-medium text-blue-300">Aí o Python brilha. Ele não substitui o Excel; ele dá superpoderes a ele.</p>
+
+                <h2 class="text-2xl font-bold text-blue-400 mt-10 mb-4">3. Mãos à Obra: O "Hello World" da Gestão</h2>
+                <p class="text-slate-300">Antes de instalar tudo, veja como a lógica funciona. Não se preocupe com os termos agora, apenas sinta o código.</p>
+                <p class="text-sm text-slate-400 mb-4"><span class="bg-slate-800 text-slate-300 px-2 py-1 rounded">💡 Analogia:</span> O comando <code>print()</code> é o seu sistema de som da loja. Ele anuncia para você o que está acontecendo lá dentro.</p>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden my-6 shadow-lg">
+                    <div class="bg-slate-900 px-4 py-2 border-b border-slate-800 flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-xs text-slate-500 font-mono ml-2">faturamento.py</span>
+                    </div>
+                    <pre class="p-5 overflow-x-auto text-sm font-mono leading-relaxed m-0"><code class="text-slate-300"><span class="text-slate-500"># Isso é um comentário. O Python ignora, serve para nós humanos.</span>
+<span class="text-blue-300">faturamento_filial_a</span> = <span class="text-orange-400">5000</span>
+<span class="text-blue-300">faturamento_filial_b</span> = <span class="text-orange-400">3500</span>
+
+<span class="text-slate-500"># O Python fazendo a conta por você</span>
+<span class="text-blue-300">total_dia</span> = <span class="text-blue-300">faturamento_filial_a</span> + <span class="text-blue-300">faturamento_filial_b</span>
+
+<span class="text-slate-500"># O anúncio do resultado</span>
+<span class="text-yellow-300">print</span>(<span class="text-green-400">f"O faturamento total das duas unidades hoje foi de: R$ {</span><span class="text-blue-300">total_dia</span><span class="text-green-400">}"</span>)</code></pre>
+                </div>
+
+                <h2 class="text-2xl font-bold text-blue-400 mt-12 mb-6">4. Preparando o Ambiente (O Passo a Passo)</h2>
+                <p class="text-slate-300 mb-6">Para o seu código rodar, precisamos de duas coisas: o <strong>Motor (Python)</strong> e a <strong>Escrivaninha (VS Code)</strong>.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-slate-800/30 border border-slate-700 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">⚙️ Passo A: O Motor</h3>
+                        <ol class="list-decimal pl-5 text-slate-300 space-y-3 text-sm">
+                            <li>Vá ao site oficial <a href="https://www.python.org" target="_blank" class="text-blue-400 hover:underline">python.org</a>.</li>
+                            <li>Baixe a versão mais recente para o seu sistema (Windows/Mac).</li>
+                        </ol>
+                        <div class="mt-5 bg-yellow-500/10 border-l-4 border-yellow-500 p-4 rounded">
+                            <p class="text-xs text-yellow-200 font-medium m-0 leading-relaxed"><strong>IMPORTANTE:</strong> Na tela de instalação, marque a caixinha <em>"Add Python to PATH"</em>. Se não marcar isso, seu computador não vai achar o motor depois!</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/30 border border-slate-700 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">💻 Passo B: A Escrivaninha</h3>
+                        <p class="text-sm text-slate-400 mb-4">O VS Code avisa se você digitar algo errado, igual a um corretor de texto inteligente.</p>
+                        <ol class="list-decimal pl-5 text-slate-300 space-y-3 text-sm">
+                            <li>Baixe em <a href="https://code.visualstudio.com" target="_blank" class="text-blue-400 hover:underline">code.visualstudio.com</a>, instale e abra.</li>
+                            <li>No lado esquerdo, procure por um ícone de quadrados (Extensions) e digite "Python".</li>
+                            <li>Clique em <strong>Install</strong> na opção oficial da Microsoft.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 mb-8 shadow-lg">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <span class="text-red-500">▶️</span> Veja como instalar na prática
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-6 m-0">Ficou com dúvida em alguma etapa? Assista ao vídeo onde eu mostro o passo a passo exato da instalação.</p>
+                    
+                    <div class="aspect-video w-full rounded-lg overflow-hidden border border-slate-800 bg-black">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/bN5m-SihvWc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-900/30 to-slate-900 border border-blue-500/30 p-6 rounded-xl mt-8 shadow-lg shadow-blue-900/10">
+                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">🏆 Desafio Prático</h3>
+                    <p class="text-slate-300 text-sm m-0 leading-relaxed">Após instalar, abra o VS Code, crie um arquivo chamado <code>teste.py</code> e tente rodar o código do faturamento que mostrei acima. Se o valor aparecer na tela, você oficialmente deixou de ser um espectador para se tornar um desenvolvedor!</p>
+                </div>
+
+            </article>
+
+            <div class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-6 mt-12 mb-10">
+                <h3 class="text-white font-bold mb-2 flex items-center gap-2">
+                    📂 Material de Apoio
+                </h3>
+                <p class="text-sm text-slate-400 mb-4">Baixe o checklist para acompanhar a aula e garantir sua instalação perfeita.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="bg-slate-900 hover:bg-slate-800 text-slate-300 text-sm px-4 py-2 rounded border border-slate-700 transition flex items-center gap-2 shadow-sm">
+                        <span class="text-red-500">📄</span> Checklist_Instalacao.pdf
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 mt-8 flex justify-between items-center">
+                <div class="hidden md:block">
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Próxima</p>
+                    <p class="text-sm text-white font-medium">Aula 02: A Lógica dos Dados</p>
+                </div>
+                <button onclick="concluirAula('python-aula-01', 'aula-02.html')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2">
+                    Concluir e Avançar <span aria-hidden="true">→</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../../js/progresso.js"></script>
+</body>
+</html>

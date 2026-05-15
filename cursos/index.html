@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos | DevUtil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        /* Ajuste fino para o brilho sutil nos cards */
+        .card-glow:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 font-sans antialiased">
+
+    <header class="border-b border-slate-800 bg-slate-950 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-white tracking-wider">
+                DEVUTIL <span class="text-blue-500 text-sm font-normal ml-1 border border-blue-500 rounded px-2 py-0.5 uppercase">Cursos</span>
+            </a>
+            <a href="../index.html" class="text-sm text-slate-400 hover:text-white transition">Voltar para Ferramentas</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        
+        <div class="mb-10 text-center md:text-left">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Aprenda na Prática</h1>
+            <p class="text-slate-400 text-lg max-w-2xl">Domine as ferramentas que o mercado de trabalho exige através de projetos reais e diretos ao ponto.</p>
+        </div>
+
+        <div class="mb-12 bg-slate-800/40 border border-slate-700/60 rounded-xl p-6 md:p-8">
+            <h3 class="text-lg font-bold text-slate-200 mb-6 flex items-center gap-2">
+                <span class="text-blue-400">💡</span> Informações Importantes:
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
+                        🎓 Certificado Real
+                    </h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">Diferente de cursos que dão certificado apenas por "assistir", aqui você precisa ser aprovado no **Desafio Final** via e-mail para receber sua certificação.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-2 flex items-center gap-2">
+                        🔒 100% Client-Side
+                    </h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">Não salvamos seus dados. Toda a navegação e arquivos de aula são processados no seu navegador, garantindo total privacidade e velocidade.</p>
+                </div>
+                <div>
+                    <h4 class="text-yellow-500 font-semibold mb-2 flex items-center gap-2">
+                        💾 Salve seu Progresso
+                    </h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">Usamos o cache local (LocalStorage). Se você limpar os dados do navegador, seu progresso nas aulas será resetado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden hover:border-blue-500/50 transition-all card-glow group flex flex-col">
+                <div class="h-44 bg-gradient-to-br from-blue-600/20 to-slate-900 flex items-center justify-center border-b border-slate-700 relative">
+                    <span class="text-6xl group-hover:scale-110 transition-transform duration-300">🐍</span>
+                    <div class="absolute top-4 right-4 bg-yellow-500/10 border border-yellow-500/50 text-yellow-500 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">
+                        Contém Certificado
+                    </div>
+                </div>
+                
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase bg-blue-400/10 px-2 py-1 rounded">Análise de Dados</span>
+                        <span class="text-[10px] font-bold text-slate-400 border border-slate-700 px-2 py-1 rounded uppercase italic">Intermediário</span>
+                    </div>
+                    
+                    <h2 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Python na Vida Real</h2>
+                    <p class="text-slate-400 text-sm mb-6 flex-1 leading-relaxed">Aprenda a criar automações, tratar planilhas gigantes e gerar relatórios profissionais. O curso focado no que as empresas realmente precisam.</p>
+                    
+                    <div class="flex items-center justify-between mb-6 text-[11px] text-slate-500 border-t border-slate-700/50 pt-4">
+                        <span class="flex items-center gap-1">⏱️ 8 Aulas</span>
+                        <span class="flex items-center gap-1">📂 Materiais inclusos</span>
+                    </div>
+
+                    <a href="python-na-vida-real/index.html" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-900/20">
+                        Acessar Agora
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/20 rounded-2xl border-2 border-slate-700/50 border-dashed flex flex-col items-center justify-center p-8 text-center min-h-[400px]">
+                <div class="w-14 h-14 bg-slate-800 rounded-full flex items-center justify-center mb-4 border border-slate-700">
+                    <span class="text-slate-600 text-2xl">+</span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-500 mb-2">Novo curso em breve</h3>
+                <p class="text-sm text-slate-600 max-w-[200px]">Estamos preparando algo sobre Automação com IA.</p>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
