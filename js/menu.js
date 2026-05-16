@@ -4,12 +4,27 @@ const aulas = [
     { id: 'python-aula-02', titulo: '02: A Lógica dos Dados', link: '/cursos/python-na-vida-real/aula-02.html' }
 ];
 
+// NOVA FUNÇÃO: Conserta a URL caso a Vercel esconda o .html
+function obterUrlAtual() {
+    let url = window.location.pathname;
+    
+    // Se a URL não terminar com / e nem com .html, a Vercel escondeu. Vamos colocar de volta!
+    if (!url.endsWith('.html') && !url.endsWith('/')) {
+        url += '.html';
+    }
+    // Se terminar com a barra /, sabemos que é a página inicial (index.html)
+    if (url.endsWith('/')) {
+        url += 'index.html';
+    }
+    
+    return url;
+}
+
 function renderizarSidebar() {
     const sidebarNav = document.getElementById('menu-aulas');
     if (!sidebarNav) return;
 
-    let urlAtual = window.location.pathname;
-    if(urlAtual === '/cursos/python-na-vida-real/') urlAtual = '/cursos/python-na-vida-real/index.html';
+    let urlAtual = obterUrlAtual(); // Usa a nossa nova função inteligente
 
     let html = `
         <div class="mb-6">
@@ -33,7 +48,6 @@ function renderizarSidebar() {
     sidebarNav.innerHTML = html;
 }
 
-// NOVA FUNÇÃO: Injeta os links da Comunidade
 function renderizarComunidade() {
     const container = document.getElementById('comunidade-container');
     if (!container) return;
@@ -53,26 +67,21 @@ function renderizarComunidade() {
     `;
 }
 
-// NOVA FUNÇÃO: Renderiza o rodapé com o botão da próxima aula automaticamente
-// Função: Renderiza o rodapé com Voltar e Avançar automaticamente
 function renderizarRodape() {
     const container = document.getElementById('rodape-container');
     if (!container) return;
 
-    let urlAtual = window.location.pathname;
-    if(urlAtual === '/cursos/python-na-vida-real/') urlAtual = '/cursos/python-na-vida-real/index.html';
+    let urlAtual = obterUrlAtual(); // Usa a nossa nova função inteligente
 
-    // Descobre em qual aula o aluno está agora
     const indexAtual = aulas.findIndex(aula => aula.link === urlAtual);
-    if (indexAtual === -1) return;
+    if (indexAtual === -1) return; // Agora ele vai achar!
 
     const aulaAtual = aulas[indexAtual];
     const proximaAula = aulas[indexAtual + 1];
-    const aulaAnterior = indexAtual > 0 ? aulas[indexAtual - 1] : null; // Descobre a aula anterior
+    const aulaAnterior = indexAtual > 0 ? aulas[indexAtual - 1] : null;
 
     let html = `<div class="border-t border-slate-800 pt-8 mt-8 flex justify-between items-center w-full">`;
 
-    // LADO ESQUERDO: Botão de Voltar (se existir aula anterior)
     if (aulaAnterior) {
         html += `
             <a href="${aulaAnterior.link}" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
@@ -80,11 +89,9 @@ function renderizarRodape() {
             </a>
         `;
     } else {
-        // Se for a primeira aula, deixa uma div vazia pra manter o botão "Avançar" colado na direita
         html += `<div></div>`; 
     }
 
-    // LADO DIREITO: Botão de Avançar ou Certificado
     if (proximaAula) {
         html += `
             <div class="flex items-center gap-4 text-right">
@@ -98,14 +105,12 @@ function renderizarRodape() {
             </div>
         `;
     } else if (aulaAtual.isUltima) {
-        // Só mostra se você marcou 'isUltima: true' lá na lista
         html += `
             <button onclick="alert('Sistema de Certificado em breve!')" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg shadow-green-900/20">
                 Solicitar Certificado 🎉
             </button>
         `;
     } else {
-        // Se acabou a lista, mas não tem a flag de última aula (ex: estamos na aula 2 e a 3 não saiu)
         html += `
             <div class="text-right flex-1">
                 <p class="text-sm text-slate-400 font-medium italic">Próximas aulas em produção...</p>
@@ -117,7 +122,6 @@ function renderizarRodape() {
     container.innerHTML = html;
 }
 
-// Quando a página carregar, o JS vai injetar o Menu E a Comunidade
 document.addEventListener('DOMContentLoaded', () => {
     renderizarSidebar();
     renderizarComunidade();
