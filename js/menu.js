@@ -53,8 +53,73 @@ function renderizarComunidade() {
     `;
 }
 
+// NOVA FUNÇÃO: Renderiza o rodapé com o botão da próxima aula automaticamente
+// Função: Renderiza o rodapé com Voltar e Avançar automaticamente
+function renderizarRodape() {
+    const container = document.getElementById('rodape-container');
+    if (!container) return;
+
+    let urlAtual = window.location.pathname;
+    if(urlAtual === '/cursos/python-na-vida-real/') urlAtual = '/cursos/python-na-vida-real/index.html';
+
+    // Descobre em qual aula o aluno está agora
+    const indexAtual = aulas.findIndex(aula => aula.link === urlAtual);
+    if (indexAtual === -1) return;
+
+    const aulaAtual = aulas[indexAtual];
+    const proximaAula = aulas[indexAtual + 1];
+    const aulaAnterior = indexAtual > 0 ? aulas[indexAtual - 1] : null; // Descobre a aula anterior
+
+    let html = `<div class="border-t border-slate-800 pt-8 mt-8 flex justify-between items-center w-full">`;
+
+    // LADO ESQUERDO: Botão de Voltar (se existir aula anterior)
+    if (aulaAnterior) {
+        html += `
+            <a href="${aulaAnterior.link}" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                ← <span class="hidden md:inline">Aula Anterior</span>
+            </a>
+        `;
+    } else {
+        // Se for a primeira aula, deixa uma div vazia pra manter o botão "Avançar" colado na direita
+        html += `<div></div>`; 
+    }
+
+    // LADO DIREITO: Botão de Avançar ou Certificado
+    if (proximaAula) {
+        html += `
+            <div class="flex items-center gap-4 text-right">
+                <div class="hidden md:block">
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest text-left">Próxima</p>
+                    <p class="text-sm text-white font-medium">${proximaAula.titulo}</p>
+                </div>
+                <button onclick="concluirAula('${aulaAtual.id}', '${proximaAula.link}')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center gap-2">
+                    Concluir <span class="hidden md:inline">e Avançar</span> <span aria-hidden="true">→</span>
+                </button>
+            </div>
+        `;
+    } else if (aulaAtual.isUltima) {
+        // Só mostra se você marcou 'isUltima: true' lá na lista
+        html += `
+            <button onclick="alert('Sistema de Certificado em breve!')" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg shadow-green-900/20">
+                Solicitar Certificado 🎉
+            </button>
+        `;
+    } else {
+        // Se acabou a lista, mas não tem a flag de última aula (ex: estamos na aula 2 e a 3 não saiu)
+        html += `
+            <div class="text-right flex-1">
+                <p class="text-sm text-slate-400 font-medium italic">Próximas aulas em produção...</p>
+            </div>
+        `;
+    }
+
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
 // Quando a página carregar, o JS vai injetar o Menu E a Comunidade
 document.addEventListener('DOMContentLoaded', () => {
     renderizarSidebar();
     renderizarComunidade();
+    renderizarRodape();
 });
